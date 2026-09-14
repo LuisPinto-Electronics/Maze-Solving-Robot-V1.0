@@ -1,0 +1,906 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    09/12/2026  17:10:29  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\STARTUP.obj, .\Objects\main.obj, .\Objects\UART.obj, .\Objects\delay.obj, .\Object
+>> s\servo.obj, .\Objects\HCSR04.obj, .\Objects\BYJ48.obj, .\Objects\MazeSolving.obj TO .\Objects\Maze-solving-robot PRI
+>> NT (.\Listings\Maze-solving-robot.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\STARTUP.obj (?C_STARTUP)
+  .\Objects\main.obj (MAIN)
+  .\Objects\UART.obj (UART)
+  .\Objects\delay.obj (DELAY)
+  .\Objects\servo.obj (SERVO)
+  .\Objects\HCSR04.obj (HCSR04)
+  .\Objects\BYJ48.obj (BYJ48)
+  .\Objects\MazeSolving.obj (MAZESOLVING)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?CLDOPTR)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?IMUL)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?UIDIV)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (PRINTF)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?CSTPTR)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?PLDIIDATA)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?CCASE)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (PUTCHAR)
+
+
+LINK MAP OF MODULE:  .\Objects\Maze-solving-robot (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0014H     UNIT         _DATA_GROUP_
+                    001CH     0004H                  *** GAP ***
+            BIT     0020H.0   0001H.1   UNIT         _BIT_GROUP_
+                    0021H.1   0000H.7                *** GAP ***
+            DATA    0022H     0026H     UNIT         ?DT?MAZESOLVING
+            DATA    0048H     000EH     UNIT         ?DT?SERVO
+            IDATA   0056H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     07F2H                  *** GAP ***
+            CODE    0800H     035CH     UNIT         ?PR?PRINTF?PRINTF
+            CODE    0B5CH     011CH     UNIT         ?PR?MAZE_SOLVING?MAZESOLVING
+            CODE    0C78H     00F5H     UNIT         ?C?LIB_CODE
+            CODE    0D6DH     00B5H     UNIT         ?CO?MAZESOLVING
+            CODE    0E22H     008FH     UNIT         ?PR?INICIO?MAZESOLVING
+            CODE    0EB1H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0F3DH     0087H     UNIT         ?PR?ISR_SERVO?SERVO
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/12/2026  17:10:29  PAGE 2
+
+
+            CODE    0FC4H     0078H     UNIT         ?PR?STEPPER_TURN_180?BYJ48
+            CODE    103CH     0076H     UNIT         ?PR?_DELAY_ACEL?BYJ48
+            CODE    10B2H     0070H     UNIT         ?PR?_STEPPER_FORWARD?BYJ48
+            CODE    1122H     0068H     UNIT         ?PR?STEPPER_GO_RIGHT?BYJ48
+            CODE    118AH     0068H     UNIT         ?PR?STEPPER_GO_LEFT?BYJ48
+            CODE    11F2H     0050H     UNIT         ?C_INITSEG
+            CODE    1242H     0044H     UNIT         ?PR?_SET_ANGLE?SERVO
+            CODE    1286H     0027H     UNIT         ?PR?_SEND_DATA?UART
+            CODE    12ADH     0027H     UNIT         ?PR?PUTCHAR?PUTCHAR
+            CODE    12D4H     0024H     UNIT         ?PR?GET_DISTANCE_CM?HCSR04
+            CODE    12F8H     0020H     UNIT         ?PR?_DELAY_MS?DELAY
+            CODE    1318H     001DH     UNIT         ?PR?_DELAY_US?DELAY
+            CODE    1335H     0019H     UNIT         ?PR?_ANGULO_TIKS?SERVO
+            CODE    134EH     0014H     UNIT         ?PR?MAIN?MAIN
+            CODE    1362H     0013H     UNIT         ?PR?UART_INIT?UART
+            CODE    1375H     0012H     UNIT         ?PR?SERVO_INIT?SERVO
+            CODE    1387H     0011H     UNIT         ?PR?STEPPER_INIT?BYJ48
+            CODE    1398H     000FH     UNIT         ?PR?BYJ48
+            CODE    13A7H     000EH     UNIT         ?PR?SENSOR_HCSR04_INIT?HCSR04
+            CODE    13B5H     000AH     UNIT         ?CO?BYJ48
+            CODE    13BFH     0008H     UNIT         ?PR?MAZESOLVING
+            CODE    13C7H     0007H     UNIT         ?PR?SERVO
+            CODE    13CEH     0007H     UNIT         ?PR?GO_FORWARD?MAZESOLVING
+            CODE    13D5H     0003H     UNIT         ?PR?GO_LEFT?MAZESOLVING
+            CODE    13D8H     0003H     UNIT         ?PR?GO_RIGHT?MAZESOLVING
+            CODE    13DBH     0003H     UNIT         ?PR?TURN_180?MAZESOLVING
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\Maze-solving-robot (?C_STARTUP)
+
+
+SEGMENT                                  BIT_GROUP          DATA_GROUP 
+  +--> CALLED SEGMENT                 START    LENGTH     START    LENGTH
+-------------------------------------------------------------------------
+?C_C51STARTUP                         -----    -----      -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                         -----    -----      -----    -----
+  +--> ?PR?STEPPER_INIT?BYJ48
+  +--> ?PR?UART_INIT?UART
+  +--> ?PR?SERVO_INIT?SERVO
+  +--> ?PR?SENSOR_HCSR04_INIT?HCSR04
+  +--> ?PR?INICIO?MAZESOLVING
+  +--> ?PR?MAZE_SOLVING?MAZESOLVING
+
+?PR?INICIO?MAZESOLVING                -----    -----      0008H    0002H
+  +--> ?CO?MAZESOLVING
+  +--> ?PR?_SEND_DATA?UART
+  +--> ?PR?_SET_ANGLE?SERVO
+  +--> ?PR?_DELAY_MS?DELAY
+
+?PR?_SEND_DATA?UART                   -----    -----      000AH    0003H
+
+?PR?_SET_ANGLE?SERVO                  -----    -----      000AH    0001H
+  +--> ?PR?_ANGULO_TIKS?SERVO
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/12/2026  17:10:29  PAGE 3
+
+
+
+?PR?MAZE_SOLVING?MAZESOLVING          -----    -----      -----    -----
+  +--> ?CO?MAZESOLVING
+  +--> ?PR?_SET_ANGLE?SERVO
+  +--> ?PR?_DELAY_MS?DELAY
+  +--> ?PR?GET_DISTANCE_CM?HCSR04
+  +--> ?PR?PRINTF?PRINTF
+  +--> ?PR?_SEND_DATA?UART
+  +--> ?PR?MAZESOLVING
+  +--> ?PR?GO_LEFT?MAZESOLVING
+  +--> ?PR?GO_RIGHT?MAZESOLVING
+  +--> ?PR?TURN_180?MAZESOLVING
+  +--> ?PR?GO_FORWARD?MAZESOLVING
+
+?PR?GET_DISTANCE_CM?HCSR04            -----    -----      -----    -----
+  +--> ?PR?_DELAY_US?DELAY
+
+?PR?PRINTF?PRINTF                     0020H.0  0001H.1    0008H    0014H
+  +--> ?PR?PUTCHAR?PUTCHAR
+
+?PR?MAZESOLVING                       -----    -----      -----    -----
+  +--> ?CO?MAZESOLVING
+
+?PR?GO_LEFT?MAZESOLVING               -----    -----      -----    -----
+  +--> ?PR?STEPPER_GO_LEFT?BYJ48
+
+?PR?STEPPER_GO_LEFT?BYJ48             -----    -----      0008H    0006H
+  +--> ?PR?_DELAY_ACEL?BYJ48
+  +--> ?PR?_DELAY_US?DELAY
+  +--> ?PR?STEPPER_INIT?BYJ48
+
+?PR?_DELAY_ACEL?BYJ48                 -----    -----      000EH    0002H
+  +--> ?PR?BYJ48
+  +--> ?CO?BYJ48
+
+?PR?GO_RIGHT?MAZESOLVING              -----    -----      -----    -----
+  +--> ?PR?STEPPER_GO_RIGHT?BYJ48
+
+?PR?STEPPER_GO_RIGHT?BYJ48            -----    -----      0008H    0006H
+  +--> ?PR?_DELAY_ACEL?BYJ48
+  +--> ?PR?_DELAY_US?DELAY
+  +--> ?PR?STEPPER_INIT?BYJ48
+
+?PR?TURN_180?MAZESOLVING              -----    -----      -----    -----
+  +--> ?PR?STEPPER_TURN_180?BYJ48
+
+?PR?STEPPER_TURN_180?BYJ48            -----    -----      0008H    0006H
+  +--> ?PR?_DELAY_ACEL?BYJ48
+  +--> ?PR?_DELAY_US?DELAY
+  +--> ?PR?STEPPER_INIT?BYJ48
+
+?PR?GO_FORWARD?MAZESOLVING            -----    -----      -----    -----
+  +--> ?PR?_STEPPER_FORWARD?BYJ48
+
+?PR?_STEPPER_FORWARD?BYJ48            -----    -----      0008H    0006H
+  +--> ?PR?_DELAY_ACEL?BYJ48
+  +--> ?PR?_DELAY_US?DELAY
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/12/2026  17:10:29  PAGE 4
+
+
+  +--> ?PR?STEPPER_INIT?BYJ48
+
+*** NEW ROOT ***************************************************
+
+?PR?ISR_SERVO?SERVO                   -----    -----      -----    -----
+  +--> ?PR?SERVO
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\Maze-solving-robot (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:0EB1H         SEGMENT       ?C_C51STARTUP
+  I:0056H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0EB4H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:0EB1H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:0EB1H         LINE#         133
+  C:0EB3H         LINE#         134
+  C:0EB4H         LINE#         135
+  C:0EB5H         LINE#         136
+  C:0EB7H         LINE#         185
+  C:0EBAH         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  C:134EH         PUBLIC        main
+  -------         PROC          MAIN
+  C:134EH         LINE#         50
+  C:134EH         LINE#         51
+  C:134EH         LINE#         54
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/12/2026  17:10:29  PAGE 5
+
+
+  C:1351H         LINE#         55
+  C:1354H         LINE#         56
+  C:1357H         LINE#         57
+  C:135AH         LINE#         59
+  C:135DH         LINE#         61
+  C:135DH         LINE#         62
+  C:135DH         LINE#         63
+  C:1360H         LINE#         64
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        UART
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:0098H.1       PUBLIC        TI
+  D:00CBH         PUBLIC        RCAP2H
+  D:00CAH         PUBLIC        RCAP2L
+  C:1286H         PUBLIC        _send_data
+  D:0099H         PUBLIC        SBUF
+  D:0098H         PUBLIC        SCON
+  D:00CDH         PUBLIC        TH2
+  D:00CCH         PUBLIC        TL2
+  C:1362H         PUBLIC        uart_init
+  D:00C8H         PUBLIC        T2CON
+  -------         PROC          UART_INIT
+  C:1362H         LINE#         4
+  C:1362H         LINE#         5
+  C:1362H         LINE#         16
+  C:1365H         LINE#         18
+  C:1368H         LINE#         19
+  C:136BH         LINE#         20
+  C:136EH         LINE#         21
+  C:1371H         LINE#         23
+  C:1374H         LINE#         26
+  -------         ENDPROC       UART_INIT
+  -------         PROC          _SEND_DATA
+  D:000AH         SYMBOL        caracter
+  -------         DO            
+  D:0006H         SYMBOL        i
+  -------         ENDDO         
+  C:1286H         LINE#         28
+  C:128CH         LINE#         29
+  C:128CH         LINE#         30
+  C:128FH         LINE#         31
+  C:129EH         LINE#         32
+  C:129EH         LINE#         33
+  C:12A0H         LINE#         34
+  C:12A3H         LINE#         35
+  C:12A5H         LINE#         36
+  C:12AAH         LINE#         37
+  C:12ACH         LINE#         38
+  -------         ENDPROC       _SEND_DATA
+  -------         ENDMOD        UART
+
+  -------         MODULE        DELAY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:12F8H         PUBLIC        _delay_ms
+  C:1318H         PUBLIC        _delay_us
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/12/2026  17:10:29  PAGE 6
+
+
+  -------         PROC          _DELAY_US
+  D:0004H         SYMBOL        us
+  -------         DO            
+  D:0002H         SYMBOL        i
+  -------         ENDDO         
+  C:1318H         LINE#         4
+  C:131CH         LINE#         5
+  C:131CH         LINE#         10
+  C:1334H         LINE#         11
+  -------         ENDPROC       _DELAY_US
+  -------         PROC          _DELAY_MS
+  D:0006H         SYMBOL        ms
+  -------         DO            
+  D:0004H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:12F8H         LINE#         14
+  C:12F8H         LINE#         15
+  C:12F8H         LINE#         17
+  C:1302H         LINE#         18
+  C:1302H         LINE#         19
+  C:1310H         LINE#         20
+  C:1317H         LINE#         21
+  -------         ENDPROC       _DELAY_MS
+  -------         ENDMOD        DELAY
+
+  -------         MODULE        SERVO
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0048H         PUBLIC        activar_1
+  D:0049H         PUBLIC        activar_2
+  D:0090H         PUBLIC        P1
+  C:0F3DH         PUBLIC        ISR_servo
+  D:004AH         PUBLIC        activar_3
+  D:004BH         PUBLIC        activar_4
+  D:00A8H         PUBLIC        IE
+  C:1335H         PUBLIC        _angulo_tiks
+  D:0089H         PUBLIC        TMOD
+  C:1242H         PUBLIC        _set_angle
+  D:004CH         PUBLIC        tiks
+  C:1375H         PUBLIC        servo_init
+  B:0088H.5       PUBLIC        TF0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  D:004EH         PUBLIC        valor_tiks_1
+  B:0088H.4       PUBLIC        TR0
+  D:0050H         PUBLIC        valor_tiks_2
+  D:0052H         PUBLIC        valor_tiks_3
+  D:0054H         PUBLIC        valor_tiks_4
+  B:0090H.0       PUBLIC        pin_servo_1
+  B:0090H.1       PUBLIC        pin_servo_2
+  B:0090H.2       PUBLIC        pin_servo_3
+  B:0090H.3       PUBLIC        pin_servo_4
+  C:13C7H         SYMBOL        Com0020
+  C:13C7H         SYMBOL        L?0033
+  C:13C7H         SYMBOL        L?0034
+  -------         PROC          COM0020
+  -------         ENDPROC       COM0020
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/12/2026  17:10:29  PAGE 7
+
+
+  -------         PROC          SERVO_INIT
+  C:1375H         LINE#         34
+  C:1375H         LINE#         35
+  C:1375H         LINE#         36
+  C:1378H         LINE#         37
+  C:137BH         LINE#         39
+  C:137EH         LINE#         40
+  C:1381H         LINE#         42
+  C:1384H         LINE#         43
+  C:1386H         LINE#         44
+  -------         ENDPROC       SERVO_INIT
+  -------         PROC          _SET_ANGLE
+  D:0007H         SYMBOL        pin
+  D:000AH         SYMBOL        angulo_int
+  C:1242H         LINE#         54
+  C:1244H         LINE#         55
+  C:1244H         LINE#         56
+  C:1252H         LINE#         58
+  C:1252H         LINE#         59
+  C:125BH         LINE#         60
+  C:125EH         LINE#         61
+  C:125FH         LINE#         63
+  C:125FH         LINE#         64
+  C:1268H         LINE#         65
+  C:126BH         LINE#         66
+  C:126CH         LINE#         68
+  C:126CH         LINE#         69
+  C:1275H         LINE#         70
+  C:1278H         LINE#         71
+  C:1279H         LINE#         73
+  C:1279H         LINE#         74
+  C:1282H         LINE#         75
+  C:1285H         LINE#         76
+  C:1285H         LINE#         78
+  C:1285H         LINE#         79
+  -------         ENDPROC       _SET_ANGLE
+  -------         PROC          ISR_SERVO
+  C:0F3DH         LINE#         90
+  C:0F41H         LINE#         92
+  C:0F43H         LINE#         94
+  C:0F4BH         LINE#         97
+  C:0F50H         LINE#         98
+  C:0F55H         LINE#         99
+  C:0F57H         LINE#         100
+  C:0F59H         LINE#         101
+  C:0F63H         LINE#         102
+  C:0F65H         LINE#         103
+  C:0F65H         LINE#         104
+  C:0F65H         LINE#         106
+  C:0F6AH         LINE#         107
+  C:0F6FH         LINE#         108
+  C:0F71H         LINE#         109
+  C:0F73H         LINE#         110
+  C:0F7DH         LINE#         111
+  C:0F7FH         LINE#         112
+  C:0F7FH         LINE#         113
+  C:0F7FH         LINE#         115
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/12/2026  17:10:29  PAGE 8
+
+
+  C:0F84H         LINE#         116
+  C:0F89H         LINE#         117
+  C:0F8BH         LINE#         118
+  C:0F8DH         LINE#         119
+  C:0F97H         LINE#         120
+  C:0F99H         LINE#         121
+  C:0F99H         LINE#         122
+  C:0F99H         LINE#         124
+  C:0F9EH         LINE#         125
+  C:0FA3H         LINE#         126
+  C:0FA5H         LINE#         127
+  C:0FA7H         LINE#         128
+  C:0FB1H         LINE#         129
+  C:0FB3H         LINE#         130
+  C:0FB3H         LINE#         131
+  C:0FB3H         LINE#         134
+  C:0FBBH         LINE#         135
+  C:0FBFH         LINE#         136
+  C:0FBFH         LINE#         137
+  -------         ENDPROC       ISR_SERVO
+  -------         PROC          _ANGULO_TIKS
+  D:0007H         SYMBOL        angulo
+  C:1335H         LINE#         149
+  C:1335H         LINE#         150
+  C:1335H         LINE#         151
+  C:134DH         LINE#         152
+  -------         ENDPROC       _ANGULO_TIKS
+  -------         ENDMOD        SERVO
+
+  -------         MODULE        HCSR04
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:00B0H.4       PUBLIC        TRIG_PIN
+  D:00B0H         PUBLIC        P3
+  C:12D4H         PUBLIC        get_distance_cm
+  C:13A7H         PUBLIC        sensor_HCSR04_init
+  D:0089H         PUBLIC        TMOD
+  D:008DH         PUBLIC        TH1
+  D:008BH         PUBLIC        TL1
+  B:0088H.6       PUBLIC        TR1
+  B:00B0H.3       PUBLIC        ECHO_PIN
+  -------         PROC          SENSOR_HCSR04_INIT
+  C:13A7H         LINE#         22
+  C:13A7H         LINE#         23
+  C:13A7H         LINE#         25
+  C:13AAH         LINE#         26
+  C:13ADH         LINE#         27
+  C:13B0H         LINE#         28
+  C:13B2H         LINE#         29
+  C:13B4H         LINE#         30
+  -------         ENDPROC       SENSOR_HCSR04_INIT
+  -------         PROC          GET_DISTANCE_CM
+  -------         DO            
+  D:0006H         SYMBOL        tiempo_us
+  -------         ENDDO         
+  C:12D4H         LINE#         32
+  C:12D4H         LINE#         33
+  C:12D4H         LINE#         35
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/12/2026  17:10:29  PAGE 9
+
+
+  C:12D7H         LINE#         36
+  C:12D9H         LINE#         37
+  C:12DBH         LINE#         38
+  C:12E1H         LINE#         39
+  C:12E3H         LINE#         40
+  C:12E6H         LINE#         41
+  C:12E9H         LINE#         42
+  C:12F1H         LINE#         43
+  -------         ENDPROC       GET_DISTANCE_CM
+  -------         ENDMOD        HCSR04
+
+  -------         MODULE        BYJ48
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  C:103CH         PUBLIC        _delay_acel
+  B:0090H.7       PUBLIC        INT1_right
+  C:1387H         PUBLIC        stepper_init
+  B:0090H.6       PUBLIC        INT2_right
+  B:0090H.5       PUBLIC        INT3_right
+  B:0090H.4       PUBLIC        INT4_right
+  B:00A0H.3       PUBLIC        INT1_left
+  B:00A0H.2       PUBLIC        INT2_left
+  B:00A0H.1       PUBLIC        INT3_left
+  B:00A0H.0       PUBLIC        INT4_left
+  C:0FC4H         PUBLIC        stepper_turn_180
+  C:1122H         PUBLIC        stepper_go_right
+  C:118AH         PUBLIC        stepper_go_left
+  C:10B2H         PUBLIC        _stepper_forward
+  C:13B5H         PUBLIC        aceleracion
+  C:1398H         SYMBOL        Com0025
+  C:1398H         SYMBOL        L?0038
+  C:139AH         SYMBOL        L?0039
+  C:139CH         SYMBOL        L?0040
+  -------         PROC          COM0025
+  -------         ENDPROC       COM0025
+  -------         PROC          STEPPER_INIT
+  C:1387H         LINE#         47
+  C:1387H         LINE#         48
+  C:1387H         LINE#         49
+  C:1389H         LINE#         50
+  C:138BH         LINE#         51
+  C:138DH         LINE#         52
+  C:138FH         LINE#         54
+  C:1391H         LINE#         55
+  C:1393H         LINE#         56
+  C:1395H         LINE#         57
+  C:1397H         LINE#         58
+  -------         ENDPROC       STEPPER_INIT
+  C:111AH         SYMBOL        L?0041
+  -------         PROC          _STEPPER_FORWARD
+  D:0008H         SYMBOL        steps
+  -------         DO            
+  D:000AH         SYMBOL        i
+  D:000CH         SYMBOL        speed
+  -------         ENDDO         
+  C:10B2H         LINE#         67
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/12/2026  17:10:29  PAGE 10
+
+
+  C:10B6H         LINE#         68
+  C:10B6H         LINE#         69
+  C:10BBH         LINE#         70
+  C:10BFH         LINE#         72
+  C:10CEH         LINE#         74
+  C:10DDH         LINE#         76
+  C:10DFH         LINE#         77
+  C:10E1H         LINE#         78
+  C:10E4H         LINE#         79
+  C:10E6H         LINE#         80
+  C:10E8H         LINE#         82
+  C:10EAH         LINE#         83
+  C:10ECH         LINE#         84
+  C:10EFH         LINE#         85
+  C:10F1H         LINE#         86
+  C:10F3H         LINE#         88
+  C:10F5H         LINE#         89
+  C:10F7H         LINE#         90
+  C:10FAH         LINE#         91
+  C:10FCH         LINE#         92
+  C:10FEH         LINE#         94
+  C:1100H         LINE#         95
+  C:1102H         LINE#         96
+  C:1109H         LINE#         97
+  C:110BH         LINE#         98
+  C:110DH         LINE#         99
+  C:1117H         LINE#         101
+  C:111AH         LINE#         103
+  -------         ENDPROC       _STEPPER_FORWARD
+  C:1034H         SYMBOL        L?0042
+  -------         PROC          STEPPER_TURN_180
+  -------         DO            
+  D:0008H         SYMBOL        steps
+  D:000AH         SYMBOL        speed
+  D:000CH         SYMBOL        i
+  -------         ENDDO         
+  C:0FC4H         LINE#         108
+  C:0FC4H         LINE#         109
+  C:0FC4H         LINE#         110
+  C:0FCAH         LINE#         111
+  C:0FCFH         LINE#         112
+  C:0FD3H         LINE#         114
+  C:0FE8H         LINE#         116
+  C:0FF7H         LINE#         118
+  C:0FF9H         LINE#         119
+  C:0FFBH         LINE#         120
+  C:0FFEH         LINE#         121
+  C:1000H         LINE#         122
+  C:1002H         LINE#         124
+  C:1004H         LINE#         125
+  C:1006H         LINE#         126
+  C:1009H         LINE#         127
+  C:100BH         LINE#         128
+  C:100DH         LINE#         130
+  C:100FH         LINE#         131
+  C:1011H         LINE#         132
+  C:1014H         LINE#         133
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/12/2026  17:10:29  PAGE 11
+
+
+  C:1016H         LINE#         134
+  C:1018H         LINE#         136
+  C:101AH         LINE#         137
+  C:101CH         LINE#         138
+  C:1023H         LINE#         139
+  C:1025H         LINE#         140
+  C:1027H         LINE#         142
+  C:1031H         LINE#         144
+  C:1034H         LINE#         145
+  -------         ENDPROC       STEPPER_TURN_180
+  C:1182H         SYMBOL        L?0043
+  -------         PROC          STEPPER_GO_RIGHT
+  -------         DO            
+  D:0008H         SYMBOL        steps
+  D:000AH         SYMBOL        speed
+  D:000CH         SYMBOL        i
+  -------         ENDDO         
+  C:1122H         LINE#         151
+  C:1122H         LINE#         152
+  C:1122H         LINE#         153
+  C:1128H         LINE#         154
+  C:112DH         LINE#         155
+  C:1131H         LINE#         157
+  C:1146H         LINE#         159
+  C:1155H         LINE#         161
+  C:1157H         LINE#         163
+  C:115AH         LINE#         164
+  C:115CH         LINE#         167
+  C:115EH         LINE#         169
+  C:1161H         LINE#         170
+  C:1163H         LINE#         173
+  C:1165H         LINE#         175
+  C:1168H         LINE#         176
+  C:116AH         LINE#         179
+  C:116CH         LINE#         181
+  C:1173H         LINE#         182
+  C:1175H         LINE#         185
+  C:117FH         LINE#         187
+  C:1182H         LINE#         188
+  -------         ENDPROC       STEPPER_GO_RIGHT
+  C:11EAH         SYMBOL        L?0044
+  -------         PROC          STEPPER_GO_LEFT
+  -------         DO            
+  D:0008H         SYMBOL        speed
+  D:000AH         SYMBOL        steps
+  D:000CH         SYMBOL        i
+  -------         ENDDO         
+  C:118AH         LINE#         194
+  C:118AH         LINE#         195
+  C:118AH         LINE#         196
+  C:118FH         LINE#         197
+  C:1195H         LINE#         198
+  C:1199H         LINE#         200
+  C:11AEH         LINE#         202
+  C:11BDH         LINE#         205
+  C:11BFH         LINE#         206
+  C:11C2H         LINE#         208
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/12/2026  17:10:29  PAGE 12
+
+
+  C:11C4H         LINE#         211
+  C:11C6H         LINE#         212
+  C:11C9H         LINE#         214
+  C:11CBH         LINE#         217
+  C:11CDH         LINE#         218
+  C:11D0H         LINE#         220
+  C:11D2H         LINE#         223
+  C:11D4H         LINE#         224
+  C:11DBH         LINE#         226
+  C:11DDH         LINE#         228
+  C:11E7H         LINE#         230
+  C:11EAH         LINE#         231
+  -------         ENDPROC       STEPPER_GO_LEFT
+  -------         PROC          _DELAY_ACEL
+  D:0006H         SYMBOL        total_steps
+  D:000EH         SYMBOL        i_steps
+  -------         DO            
+  D:0002H         SYMBOL        accel_steps
+  -------         ENDDO         
+  C:103CH         LINE#         248
+  C:1040H         LINE#         249
+  C:1040H         LINE#         250
+  C:104BH         LINE#         252
+  C:1054H         LINE#         253
+  C:1058H         LINE#         255
+  C:1065H         LINE#         256
+  C:106AH         LINE#         258
+  C:1076H         LINE#         259
+  C:107BH         LINE#         261
+  C:108BH         LINE#         262
+  C:1090H         LINE#         264
+  C:10A2H         LINE#         265
+  C:10A7H         LINE#         268
+  C:10B1H         LINE#         269
+  -------         ENDPROC       _DELAY_ACEL
+  -------         ENDMOD        BYJ48
+
+  -------         MODULE        MAZESOLVING
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0E22H         PUBLIC        inicio
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  C:0E21H         PUBLIC        MIN_distance
+  C:0B5CH         PUBLIC        maze_solving
+  C:13CEH         PUBLIC        go_forward
+  C:13DBH         PUBLIC        turn_180
+  B:00A0H.4       PUBLIC        led_1
+  B:00A0H.5       PUBLIC        led_2
+  D:0022H         PUBLIC        distance_right
+  C:13D8H         PUBLIC        go_right
+  D:0024H         PUBLIC        distance_front
+  D:0026H         PUBLIC        distance_left
+  C:13D5H         PUBLIC        go_left
+  D:0028H         PUBLIC        buffer
+  C:13BFH         SYMBOL        Com0017
+  C:13BFH         SYMBOL        L?0024
+  C:13BFH         SYMBOL        L?0025
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/12/2026  17:10:29  PAGE 13
+
+
+  -------         PROC          COM0017
+  -------         ENDPROC       COM0017
+  C:0EA4H         SYMBOL        L?0022
+  -------         PROC          INICIO
+  -------         DO            
+  D:0008H         SYMBOL        i
+  -------         ENDDO         
+  C:0E22H         LINE#         41
+  C:0E22H         LINE#         42
+  C:0E22H         LINE#         43
+  C:0E27H         LINE#         45
+  C:0E29H         LINE#         46
+  C:0E2BH         LINE#         48
+  C:0E34H         LINE#         49
+  C:0E3DH         LINE#         51
+  C:0E44H         LINE#         52
+  C:0E48H         LINE#         53
+  C:0E4BH         LINE#         54
+  C:0E4DH         LINE#         55
+  C:0E4FH         LINE#         56
+  C:0E56H         LINE#         57
+  C:0E5AH         LINE#         58
+  C:0E5DH         LINE#         59
+  C:0E5FH         LINE#         60
+  C:0E61H         LINE#         61
+  C:0E68H         LINE#         62
+  C:0E71H         LINE#         63
+  C:0E78H         LINE#         65
+  C:0E7AH         LINE#         66
+  C:0E7CH         LINE#         68
+  C:0E81H         LINE#         69
+  C:0E83H         LINE#         70
+  C:0E85H         LINE#         71
+  C:0E8CH         LINE#         72
+  C:0E9FH         LINE#         74
+  C:0EA1H         LINE#         75
+  C:0EA3H         LINE#         77
+  -------         ENDPROC       INICIO
+  C:0C3EH         SYMBOL        L?0020
+  C:0C5CH         SYMBOL        L?0021
+  C:0C6CH         SYMBOL        L?0026
+  -------         PROC          MAZE_SOLVING
+  C:0B5CH         LINE#         92
+  C:0B5CH         LINE#         93
+  C:0B5CH         LINE#         94
+  C:0B5EH         LINE#         95
+  C:0B60H         LINE#         96
+  C:0B60H         LINE#         97
+  C:0B67H         LINE#         98
+  C:0B76H         LINE#         99
+  C:0B76H         LINE#         100
+  C:0B76H         LINE#         101
+  C:0B76H         LINE#         102
+  C:0B79H         LINE#         104
+  C:0B7BH         LINE#         105
+  C:0B7BH         LINE#         106
+  C:0B82H         LINE#         107
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/12/2026  17:10:29  PAGE 14
+
+
+  C:0B91H         LINE#         108
+  C:0B91H         LINE#         109
+  C:0B91H         LINE#         110
+  C:0B91H         LINE#         111
+  C:0B94H         LINE#         113
+  C:0B9BH         LINE#         114
+  C:0BA2H         LINE#         115
+  C:0BA9H         LINE#         116
+  C:0BC1H         LINE#         117
+  C:0BCAH         LINE#         118
+  C:0BCAH         LINE#         119
+  C:0BCAH         LINE#         120
+  C:0BCDH         LINE#         122
+  C:0BD4H         LINE#         123
+  C:0BD4H         LINE#         124
+  C:0BD4H         LINE#         125
+  C:0BD7H         LINE#         126
+  C:0BD9H         LINE#         128
+  C:0BE7H         LINE#         129
+  C:0BF0H         LINE#         130
+  C:0BF3H         LINE#         131
+  C:0BF3H         LINE#         132
+  C:0BF5H         LINE#         134
+  C:0BF5H         LINE#         135
+  C:0BF5H         LINE#         137
+  C:0C03H         LINE#         138
+  C:0C09H         LINE#         139
+  C:0C0BH         LINE#         141
+  C:0C0BH         LINE#         142
+  C:0C0BH         LINE#         144
+  C:0C1BH         LINE#         145
+  C:0C22H         LINE#         146
+  C:0C25H         LINE#         147
+  C:0C25H         LINE#         148
+  C:0C27H         LINE#         150
+  C:0C27H         LINE#         151
+  C:0C27H         LINE#         152
+  C:0C2EH         LINE#         153
+  C:0C31H         LINE#         154
+  C:0C3AH         LINE#         155
+  C:0C3DH         LINE#         157
+  C:0C3DH         LINE#         158
+  C:0C3DH         LINE#         160
+  C:0C3DH         LINE#         161
+  -------         ENDPROC       MAZE_SOLVING
+  -------         PROC          GO_FORWARD
+  C:13CEH         LINE#         163
+  C:13CEH         LINE#         164
+  C:13CEH         LINE#         165
+  -------         ENDPROC       GO_FORWARD
+  -------         PROC          GO_LEFT
+  C:13D5H         LINE#         168
+  C:13D5H         LINE#         169
+  C:13D5H         LINE#         170
+  -------         ENDPROC       GO_LEFT
+  -------         PROC          GO_RIGHT
+  C:13D8H         LINE#         173
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/12/2026  17:10:29  PAGE 15
+
+
+  C:13D8H         LINE#         174
+  C:13D8H         LINE#         175
+  -------         ENDPROC       GO_RIGHT
+  -------         PROC          TURN_180
+  C:13DBH         LINE#         178
+  C:13DBH         LINE#         179
+  C:13DBH         LINE#         180
+  -------         ENDPROC       TURN_180
+  -------         ENDMOD        MAZESOLVING
+
+  -------         MODULE        ?C?CLDOPTR
+  C:0C78H         PUBLIC        ?C?CLDOPTR
+  -------         ENDMOD        ?C?CLDOPTR
+
+  -------         MODULE        ?C?IMUL
+  C:0CA5H         PUBLIC        ?C?IMUL
+  -------         ENDMOD        ?C?IMUL
+
+  -------         MODULE        ?C?UIDIV
+  C:0CB7H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+  -------         MODULE        PRINTF
+  D:0008H         PUBLIC        ?_PRINTF517?BYTE
+  D:0008H         PUBLIC        ?_PRINTF?BYTE
+  D:0008H         PUBLIC        ?_SPRINTF517?BYTE
+  D:0008H         PUBLIC        ?_SPRINTF?BYTE
+  C:0862H         PUBLIC        _PRINTF
+  C:0862H         PUBLIC        _PRINTF517
+  C:085CH         PUBLIC        _SPRINTF
+  C:085CH         PUBLIC        _SPRINTF517
+  -------         ENDMOD        PRINTF
+
+  -------         MODULE        ?C?CLDPTR
+  C:0D0CH         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?CSTPTR
+  C:0D25H         PUBLIC        ?C?CSTPTR
+  -------         ENDMOD        ?C?CSTPTR
+
+  -------         MODULE        ?C?PLDIIDATA
+  C:0D37H         PUBLIC        ?C?PLDIIDATA
+  -------         ENDMOD        ?C?PLDIIDATA
+
+  -------         MODULE        ?C?CCASE
+  C:0D47H         PUBLIC        ?C?CCASE
+  -------         ENDMOD        ?C?CCASE
+
+  -------         MODULE        PUTCHAR
+  C:12ADH         PUBLIC        _PUTCHAR
+  -------         ENDMOD        PUTCHAR
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 06EBH BYTE (86%) *
+******************************************************************************
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/12/2026  17:10:29  PAGE 16
+
+
+Program Size: data=82.1 xdata=0 code=3044
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

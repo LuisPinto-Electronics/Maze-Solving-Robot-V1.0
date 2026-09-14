@@ -1,0 +1,301 @@
+C51 COMPILER V9.60.7.0   BYJ48                                                             09/12/2026 17:05:56 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BYJ48
+OBJECT MODULE PLACED IN .\Objects\BYJ48.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE BYJ48.c OPTIMIZE(9,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\BYJ
+                    -48.lst) TABS(2) OBJECT(.\Objects\BYJ48.obj)
+
+line level    source
+
+   1          /*
+   2           * BYJ48.c
+   3           *
+   4           * Author: Luis J. Pinto G
+   5           *
+   6           * Description:
+   7           * Driver for two 28BYJ-48 stepper motors.
+   8           *
+   9           * This module provides the basic movement functions used
+  10           * by the maze-solving robot:
+  11           *
+  12           *      - Forward
+  13           *      - Backward
+  14           *      - Turn left
+  15           *      - Turn right
+  16           *      - Rotate 180°
+  17           *
+  18           * It also implements a simple acceleration profile to
+  19           * reduce missed steps during motor startup.
+  20           */
+  21           
+  22          #include "BYJ48.h"
+  23          #include "delay.h"
+  24          
+  25          /// left stepper motor pins
+  26          sbit INT1_right = P1^7;
+  27          sbit INT2_right = P1^6;
+  28          sbit INT3_right = P1^5;
+  29          sbit INT4_right = P1^4;
+  30          
+  31          /// right stepper motor pins
+  32          sbit INT1_left = P2^3;
+  33          sbit INT2_left = P2^2;
+  34          sbit INT3_left = P2^1;
+  35          sbit INT4_left = P2^0;
+  36          
+  37          /// acceleration profile stored in Flash memory
+  38          const unsigned int code aceleracion[5] = {450, 350, 280, 220, 160};
+  39          
+  40          /*
+  41           * Initializes both stepper motors.
+  42           *
+  43           * All motor outputs are disabled to ensure the robot
+  44           * starts in a safe state.
+  45           */
+  46          
+  47          void stepper_init(void)
+  48          {
+  49   1        INT1_left = 0;
+  50   1        INT2_left = 0;
+  51   1        INT3_left = 0;
+  52   1        INT4_left = 0;
+  53   1        
+  54   1        INT1_right = 0;
+C51 COMPILER V9.60.7.0   BYJ48                                                             09/12/2026 17:05:56 PAGE 2   
+
+  55   1        INT2_right = 0;
+  56   1        INT3_right = 0;
+  57   1        INT4_right = 0;
+  58   1      }
+  59          
+  60          
+  61          /*
+  62           * Moves the robot forward.
+  63           *
+  64           * Parameters:
+  65           *      steps : Number of full steps.
+  66           */
+  67          void stepper_forward(unsigned int steps)
+  68          {
+  69   1        int i = 0;
+  70   1        int speed = 0;
+  71   1        
+  72   1        for(i = 0; i < steps; i ++){
+  73   2          
+  74   2          speed = delay_acel(steps, i);
+  75   2          
+  76   2          INT1_left = 1; /// INT 4
+  77   2          INT1_right = 1;
+  78   2          delay_us(speed);
+  79   2          INT1_left = 0;
+  80   2          INT1_right = 0;
+  81   2          
+  82   2          INT2_left = 1; /// INT 3
+  83   2          INT2_right = 1;
+  84   2          delay_us(speed);
+  85   2          INT2_left = 0;
+  86   2          INT2_right = 0;
+  87   2          
+  88   2          INT3_left = 1; /// INT 2
+  89   2          INT3_right = 1;
+  90   2          delay_us(speed);
+  91   2          INT3_left = 0;
+  92   2          INT3_right = 0;
+  93   2          
+  94   2          INT4_left = 1; /// INT 1
+  95   2          INT4_right = 1;
+  96   2          delay_us(speed);
+  97   2          INT4_left = 0;
+  98   2          INT4_right = 0;
+  99   2        }
+ 100   1        
+ 101   1        stepper_init();
+ 102   1        
+ 103   1      }
+ 104          
+ 105          /*
+ 106           * Rotates the robot 180 degrees.
+ 107           */
+ 108          void stepper_turn_180(void)
+ 109          {
+ 110   1        const int steps = 400;
+ 111   1        int speed = 0;
+ 112   1        int i = 0;
+ 113   1        
+ 114   1        for(i = 0; i < steps; i ++){
+ 115   2          
+ 116   2          speed = delay_acel(steps, i);
+C51 COMPILER V9.60.7.0   BYJ48                                                             09/12/2026 17:05:56 PAGE 3   
+
+ 117   2          
+ 118   2          INT1_left = 1;
+ 119   2          INT4_right = 1;
+ 120   2          delay_us(speed);
+ 121   2          INT1_left = 0;
+ 122   2          INT4_right = 0;
+ 123   2          
+ 124   2          INT2_left = 1;
+ 125   2          INT3_right = 1;
+ 126   2          delay_us(speed);
+ 127   2          INT2_left = 0;
+ 128   2          INT3_right = 0;
+ 129   2          
+ 130   2          INT3_left = 1;
+ 131   2          INT2_right = 1;
+ 132   2          delay_us(speed);
+ 133   2          INT3_left = 0;
+ 134   2          INT2_right = 0;
+ 135   2          
+ 136   2          INT4_left = 1;
+ 137   2          INT1_right = 1;
+ 138   2          delay_us(speed);
+ 139   2          INT4_left = 0;
+ 140   2          INT1_right = 0;
+ 141   2        
+ 142   2        }
+ 143   1        
+ 144   1        stepper_init();
+ 145   1      }
+ 146          
+ 147          /*
+ 148           * Rotates the robot 90 degrees to the right
+ 149           */
+ 150          
+ 151          void stepper_go_right(void)
+ 152          {
+ 153   1        int steps = 400;
+ 154   1        int speed = 0;
+ 155   1        int i = 0;
+ 156   1        
+ 157   1        for(i = 0; i < steps; i ++){
+ 158   2          
+ 159   2          speed = delay_acel(steps, i);
+ 160   2          
+ 161   2          INT1_left = 1;
+ 162   2          //INT4_right = 1;
+ 163   2          delay_us(speed);
+ 164   2          INT1_left = 0;
+ 165   2          //INT4_right = 0;
+ 166   2          
+ 167   2          INT2_left = 1;
+ 168   2          //INT3_right = 1;
+ 169   2          delay_us(speed);
+ 170   2          INT2_left = 0;
+ 171   2          //INT3_right = 0;
+ 172   2          
+ 173   2          INT3_left = 1;
+ 174   2          //INT2_right = 1;
+ 175   2          delay_us(speed);
+ 176   2          INT3_left = 0;
+ 177   2          //INT2_right = 0;
+ 178   2          
+C51 COMPILER V9.60.7.0   BYJ48                                                             09/12/2026 17:05:56 PAGE 4   
+
+ 179   2          INT4_left = 1;
+ 180   2          //INT1_right = 1;
+ 181   2          delay_us(speed);
+ 182   2          INT4_left = 0;
+ 183   2          //INT1_right = 0;
+ 184   2        
+ 185   2        }
+ 186   1        
+ 187   1        stepper_init();
+ 188   1      }
+ 189          
+ 190          /*
+ 191           * Rotates the robot 90 degrees to the left.
+ 192           */
+ 193          
+ 194          void stepper_go_left(void)
+ 195          {
+ 196   1        int speed = 0;
+ 197   1        int steps = 400;
+ 198   1        int i = 0;
+ 199   1        
+ 200   1        for(i = 0; i < steps; i ++){
+ 201   2          
+ 202   2          speed = delay_acel(steps, i);
+ 203   2          
+ 204   2          //INT4_left = 1;
+ 205   2          INT1_right = 1;
+ 206   2          delay_us(speed);
+ 207   2          //INT4_left = 0;
+ 208   2          INT1_right = 0;
+ 209   2          
+ 210   2          //INT3_left = 1;
+ 211   2          INT2_right = 1;
+ 212   2          delay_us(speed);
+ 213   2          //INT3_left = 0;
+ 214   2          INT2_right = 0;
+ 215   2          
+ 216   2          //INT2_left = 1;
+ 217   2          INT3_right = 1;
+ 218   2          delay_us(speed);
+ 219   2          //INT2_left = 0;
+ 220   2          INT3_right = 0;
+ 221   2          
+ 222   2          //INT1_left = 1;
+ 223   2          INT4_right = 1;
+ 224   2          delay_us(speed);
+ 225   2          //INT1_left = 0;
+ 226   2          INT4_right = 0;
+ 227   2        
+ 228   2        }
+ 229   1        
+ 230   1        stepper_init();
+ 231   1      }
+ 232          
+ 233          /*
+ 234           * Calculates the motor delay according to
+ 235           * the current position in the movement.
+ 236           *
+ 237           * A simple five-stage acceleration profile is
+ 238           * applied during the first 10% of the movement.
+ 239           *
+ 240           * Parameters:
+C51 COMPILER V9.60.7.0   BYJ48                                                             09/12/2026 17:05:56 PAGE 5   
+
+ 241           *      total_steps : Total movement steps.
+ 242           *      i_steps     : Current step.
+ 243           *
+ 244           * Returns:
+ 245           *      Delay in microseconds.
+ 246           */
+ 247          
+ 248          unsigned int delay_acel(unsigned int total_steps, unsigned int i_steps)
+ 249          {
+ 250   1          unsigned int accel_steps = total_steps / 10;   /// Solo acelerar el 10% de los pasos
+ 251   1      
+ 252   1          if(accel_steps < 5)
+ 253   1              accel_steps = 5; 
+ 254   1      
+ 255   1          if(i_steps < (accel_steps * 1) / 5)
+ 256   1              return aceleracion[0];
+ 257   1      
+ 258   1          else if(i_steps < (accel_steps * 2) / 5)
+ 259   1              return aceleracion[1];
+ 260   1      
+ 261   1          else if(i_steps < (accel_steps * 3) / 5)
+ 262   1              return aceleracion[2];
+ 263   1      
+ 264   1          else if(i_steps < (accel_steps * 4) / 5)
+ 265   1              return aceleracion[3];
+ 266   1      
+ 267   1          else
+ 268   1              return aceleracion[4];
+ 269   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    590    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      26
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

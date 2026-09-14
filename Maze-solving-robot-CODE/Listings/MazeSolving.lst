@@ -1,0 +1,211 @@
+C51 COMPILER V9.60.7.0   MAZESOLVING                                                       09/12/2026 17:10:04 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAZESOLVING
+OBJECT MODULE PLACED IN .\Objects\MazeSolving.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE MazeSolving.c OPTIMIZE(9,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listin
+                    -gs\MazeSolving.lst) TABS(2) OBJECT(.\Objects\MazeSolving.obj)
+
+line level    source
+
+   1          
+   2          /*
+   3           * MazeSolving.c
+   4           *
+   5           * Description:
+   6           * Implements the left-hand wall-following algorithm used
+   7           * by the maze-solving robot.
+   8           *
+   9           * The robot scans three directions:
+  10           *      Left
+  11           *      Front
+  12           *      Right
+  13           *
+  14           * and selects the first available path according to the
+  15           * following priority:
+  16           *
+  17           *      Left
+  18           *      Front
+  19           *      Right
+  20           *      Turn around
+  21           *
+  22           */
+  23           
+  24          #include "MazeSolving.h"
+  25          
+  26          #define RIGHT_ANGLE 15
+  27          #define FRONT_ANGLE 95
+  28          #define LEFT_ANGLE 170
+  29          
+  30          int distance_left = 0;
+  31          int distance_front = 0;
+  32          int distance_right = 0;
+  33          
+  34          unsigned char code MIN_distance = 15;
+  35          
+  36          sbit led_1 = P2^4;
+  37          sbit led_2 = P2^5;
+  38          
+  39          char buffer[32] = "valor";
+  40          
+  41          void inicio(void)
+  42          {
+  43   1        int i = 0;
+  44   1        
+  45   1        led_1 = 0;
+  46   1        led_2 = 0;
+  47   1        
+  48   1        send_data("Maze-Solving Robot\n");
+  49   1        send_data("STLP Electronica\n");
+  50   1        
+  51   1        set_angle(pin_1_0, LEFT_ANGLE);
+  52   1        send_data("LEFT\n");
+  53   1        delay_ms(500);
+  54   1        led_1 = 1;
+C51 COMPILER V9.60.7.0   MAZESOLVING                                                       09/12/2026 17:10:04 PAGE 2   
+
+  55   1        led_2 = 1;
+  56   1        set_angle(pin_1_0, RIGHT_ANGLE);
+  57   1        send_data("RIGHT\n");
+  58   1        delay_ms(500);
+  59   1        led_1 = 0;
+  60   1        led_2 = 0;
+  61   1        set_angle(pin_1_0, FRONT_ANGLE);
+  62   1        send_data("FRONT\n");
+  63   1        delay_ms(500);
+  64   1        
+  65   1        led_1 = 1;
+  66   1        led_2 = 0;
+  67   1        
+  68   1        for(i = 0; i < 20; i ++){
+  69   2          led_1 = !led_1;
+  70   2          led_2 = !led_2;
+  71   2          delay_ms(100);
+  72   2        }
+  73   1        
+  74   1        led_1 = 0;
+  75   1        led_2 = 0;
+  76   1      
+  77   1      }
+  78          
+  79          /*
+  80           * Main maze-solving algorithm.
+  81           *
+  82           * The robot scans the left, front and right directions
+  83           * using the ultrasonic sensor.
+  84           *
+  85           * Priority:
+  86           * 1. Left
+  87           * 2. Front
+  88           * 3. Right
+  89           * 4. Turn around (180°)
+  90           */
+  91          
+  92          void maze_solving(void)
+  93          {
+  94   1        led_2 = 1;
+  95   1        set_angle(pin_1_0, LEFT_ANGLE); /// rotate the ultrasonic sensor to the left
+  96   1        delay_ms(100);
+  97   1        distance_left = get_distance_cm();
+  98   1        sprintf(buffer, "Distance LEFT: %d cm\n", distance_left);
+  99   1        send_data(buffer);
+ 100   1        led_1 = !led_1;
+ 101   1        led_2 = !led_2;
+ 102   1        delay_ms(500);
+ 103   1        
+ 104   1        set_angle(pin_1_0, FRONT_ANGLE); /// rotate the ultrasonic sensor to the front
+ 105   1        delay_ms(100);
+ 106   1        distance_front = get_distance_cm();
+ 107   1        sprintf(buffer, "Distance FRONT: %d cm\n", distance_front);
+ 108   1        send_data(buffer);
+ 109   1        led_1 = !led_1;
+ 110   1        led_2 = !led_2;
+ 111   1        delay_ms(500);
+ 112   1        
+ 113   1        set_angle(pin_1_0, RIGHT_ANGLE); /// rotate the ultrasonic sensor to the right
+ 114   1        delay_ms(100);
+ 115   1        distance_right = get_distance_cm();
+ 116   1        sprintf(buffer, "Distance RIGHT: %d cm\n", distance_right);
+C51 COMPILER V9.60.7.0   MAZESOLVING                                                       09/12/2026 17:10:04 PAGE 3   
+
+ 117   1        send_data(buffer);
+ 118   1        led_1 = !led_1;
+ 119   1        led_2 = !led_2;
+ 120   1        delay_ms(500);
+ 121   1        
+ 122   1        set_angle(pin_1_0, FRONT_ANGLE); /// rotate the ultrasonic sensor to the front
+ 123   1        led_1 = !led_1;
+ 124   1        led_2 = !led_2;
+ 125   1        delay_ms(500);
+ 126   1        led_2 = 0;
+ 127   1        
+ 128   1        if(distance_left >= MIN_distance){ /// Left path is free
+ 129   2          send_data("Left\n\n");
+ 130   2          go_left(); /// turn to the left
+ 131   2          send_data("Go Forward\n");
+ 132   2          go_forward(); /// go ahead
+ 133   2          return; /// exit the function after executing the selected movement
+ 134   2        }
+ 135   1        else{ /// Left path is blocked
+ 136   2          
+ 137   2          if(distance_front >= MIN_distance){ ///Front path is free
+ 138   3            send_data("Go Forward\n\n");
+ 139   3            go_forward();
+ 140   3            return; /// exit the function after executing the selected movement
+ 141   3          }
+ 142   2          else{ /// front path is blocked
+ 143   3      
+ 144   3            if(distance_right >= MIN_distance){ /// right path is free
+ 145   4              send_data("Right\n\n");
+ 146   4              go_right();
+ 147   4              send_data("Go Forward\n");
+ 148   4              go_forward();
+ 149   4              return; /// exit the function after executing the selected movement
+ 150   4            }
+ 151   3            else{ // No path is available, turn around
+ 152   4              send_data("180 degrees\n\n");
+ 153   4              turn_180();
+ 154   4              send_data("Go Forward\n");
+ 155   4              go_forward();
+ 156   4              return; /// exit the function after executing the selected movement
+ 157   4            }
+ 158   3          }
+ 159   2          
+ 160   2        }/// end else
+ 161   1      }
+ 162          
+ 163          void go_forward(void)
+ 164          {
+ 165   1        stepper_forward(385); /// moves the robot forward one cell
+ 166   1      }
+ 167          
+ 168          void go_left(void)
+ 169          {
+ 170   1        stepper_go_left();
+ 171   1      }
+ 172          
+ 173          void go_right(void)
+ 174          {
+ 175   1        stepper_go_right();
+ 176   1      }
+ 177          
+ 178          void turn_180(void)
+C51 COMPILER V9.60.7.0   MAZESOLVING                                                       09/12/2026 17:10:04 PAGE 4   
+
+ 179          {
+ 180   1        stepper_turn_180();
+ 181   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    451    ----
+   CONSTANT SIZE    =    181    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     38       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

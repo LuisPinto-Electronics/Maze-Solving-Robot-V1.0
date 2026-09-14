@@ -1,0 +1,180 @@
+C51 COMPILER V9.60.7.0   SERVO                                                             09/11/2026 10:55:53 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE SERVO
+OBJECT MODULE PLACED IN .\Objects\servo.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE servo.c OPTIMIZE(9,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\ser
+                    -vo.lst) TABS(2) OBJECT(.\Objects\servo.obj)
+
+line level    source
+
+   1          
+   2          /*
+   3           * servo.c
+   4           *
+   5           * Author: Luis J. Pinto G.
+   6           *
+   7           * Description:
+   8           * Software driver for up to four hobby servo motors.
+   9           *
+  10           * The PWM signal is generated using Timer 0 interrupts,
+  11           * allowing independent angle control for each servo.
+  12           *
+  13           * Supported servo outputs:
+  14           *      P1.0
+  15           *      P1.1
+  16           *      P1.2
+  17           *      P1.3
+  18           */
+  19           
+  20          #include "servo.h"
+  21          
+  22          volatile unsigned char activar_1 = 0, activar_2 = 0, activar_3 = 0, activar_4 = 0;
+  23          volatile unsigned int valor_tiks_1 = 0, valor_tiks_2 = 0, valor_tiks_3 = 0, valor_tiks_4 = 0;
+  24          volatile unsigned int tiks = 0;
+  25          
+  26          
+  27          /*
+  28           * Initializes Timer 0 for software PWM generation.
+  29           *
+  30           * Timer 0 operates in Mode 2 (8-bit auto-reload)
+  31           * and generates the interrupts required to produce
+  32           * the servo control pulses.
+  33           */
+  34          void servo_init(void)
+  35          {
+  36   1          TMOD &= 0xF0;
+  37   1          TMOD |= 0x02;   // Timer0, Modo 2 (8 bits, auto-reload)
+  38   1      
+  39   1          TH0 = 0x9C;     // 256 - 100 = 156 = 0x9C  (recarga automática)
+  40   1          TL0 = 0x9C;     // carga inicial igual
+  41   1      
+  42   1          IE |= 0x82;
+  43   1          TR0 = 1;
+  44   1      }
+  45          
+  46          
+  47          /*
+  48           * Sets the desired angle of the selected servo.
+  49           *
+  50           * Parameters:
+  51           *      pin       Servo output pin.
+  52           *      angle     Desired angle (degrees).
+  53           */
+  54          void set_angle(pin_servo_t pin, unsigned char angulo_int)
+C51 COMPILER V9.60.7.0   SERVO                                                             09/11/2026 10:55:53 PAGE 2   
+
+  55          {
+  56   1        switch(pin){
+  57   2          
+  58   2          case pin_1_0:
+  59   2            valor_tiks_1 = angulo_tiks(angulo_int);
+  60   2            activar_1 = 1;
+  61   2          break;
+  62   2          
+  63   2          case pin_1_1:
+  64   2            valor_tiks_2 = angulo_tiks(angulo_int);
+  65   2            activar_2 = 1;
+  66   2          break;
+  67   2          
+  68   2          case pin_1_2:
+  69   2            valor_tiks_3 = angulo_tiks(angulo_int);
+  70   2            activar_3 = 1;
+  71   2          break;
+  72   2          
+  73   2          case pin_1_3:
+  74   2            valor_tiks_4 = angulo_tiks(angulo_int);
+  75   2            activar_4 = 1;
+  76   2          break;
+  77   2          
+  78   2        }
+  79   1      }
+  80          
+  81          
+  82          /*
+  83           * Timer 0 Interrupt Service Routine.
+  84           *
+  85           * Generates the PWM pulses for all enabled servos.
+  86           * The pulse width depends on the angle previously
+  87           * selected with set_angle().
+  88           */
+  89          
+  90          void ISR_servo(void) interrupt 1
+  91          {
+  92   1        TF0 = 0; /// limpiar la bandera
+  93   1        
+  94   1        tiks ++;
+  95   1        
+  96   1        /******************************/
+  97   1        if(activar_1 == 1){
+  98   2        if(tiks == 1){
+  99   3          pin_servo_1 = 1;
+ 100   3        }
+ 101   2        else if(tiks == valor_tiks_1){
+ 102   3          pin_servo_1 = 0;
+ 103   3        }
+ 104   2        }
+ 105   1        /******************************/
+ 106   1        if(activar_2 == 1){
+ 107   2        if(tiks == 1){
+ 108   3          pin_servo_2 = 1;
+ 109   3        }
+ 110   2        else if(tiks == valor_tiks_2){
+ 111   3          pin_servo_2 = 0;
+ 112   3        }
+ 113   2        }
+ 114   1        /******************************/
+ 115   1        if(activar_3 == 1){
+ 116   2        if(tiks == 1){
+C51 COMPILER V9.60.7.0   SERVO                                                             09/11/2026 10:55:53 PAGE 3   
+
+ 117   3          pin_servo_3 = 1;
+ 118   3        }
+ 119   2        else if(tiks == valor_tiks_3){
+ 120   3          pin_servo_3 = 0;
+ 121   3        }
+ 122   2        }
+ 123   1        /******************************/
+ 124   1        if(activar_4 == 1){
+ 125   2        if(tiks == 1){
+ 126   3          pin_servo_4 = 1;
+ 127   3        }
+ 128   2        else if(tiks == valor_tiks_4){
+ 129   3          pin_servo_4 = 0;
+ 130   3        }
+ 131   2        } 
+ 132   1        /******************************/
+ 133   1        
+ 134   1        if(tiks == PERIODO_TIKS){
+ 135   2          tiks = 0;
+ 136   2        }
+ 137   1      }
+ 138          
+ 139          /*
+ 140           * Converts an angle (degrees) into timer ticks.
+ 141           *
+ 142           * Parameters:
+ 143           *      angle   Servo angle (0° to 180°).
+ 144           *
+ 145           * Returns:
+ 146           *      Pulse width expressed in timer ticks.
+ 147           */
+ 148          
+ 149          unsigned int angulo_tiks(unsigned char angulo)
+ 150          {
+ 151   1        return 4 + (((unsigned int)angulo * 125 + 512) >> 10);
+ 152   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    253    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     14       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

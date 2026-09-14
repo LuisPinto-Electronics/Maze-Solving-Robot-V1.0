@@ -1,0 +1,45 @@
+C51 COMPILER V9.60.7.0   DELAY                                                             09/11/2026 10:55:53 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE DELAY
+OBJECT MODULE PLACED IN .\Objects\delay.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE delay.c OPTIMIZE(9,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\del
+                    -ay.lst) TABS(2) OBJECT(.\Objects\delay.obj)
+
+line level    source
+
+   1          #include "delay.h"
+   2          
+   3          // Función para retraso en microsegundos
+   4          void delay_us(unsigned int us)
+   5          {
+   6   1          unsigned int i;
+   7   1          // A 12MHz (12T), cada iteración de este bucle consume 
+   8   1          // aproximadamente entre 6 y 8 ciclos de máquina según el compilador.
+   9   1          // Dividir entre 2 ajusta de forma óptima el tiempo total real.
+  10   1          for(i = 0; i < (us / 2); i++); 
+  11   1      }
+  12          
+  13          // Función para retraso en milisegundos
+  14          void delay_ms(unsigned int ms)
+  15          {
+  16   1          unsigned int i, j;
+  17   1          for(i = 0; i < ms; i++)
+  18   1          {
+  19   2              for(j = 0; j < 120; j++); // 120 iteraciones aproximan 1ms a 12MHz
+  20   2          }
+  21   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     61    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,10 @@
+".\Objects\STARTUP.obj",
+".\Objects\main.obj",
+".\Objects\UART.obj",
+".\Objects\delay.obj",
+".\Objects\servo.obj",
+".\Objects\HCSR04.obj",
+".\Objects\BYJ48.obj",
+".\Objects\MazeSolving.obj" 
+TO ".\Objects\Maze-solving-robot" 
+PRINT(".\Listings\Maze-solving-robot.m51")

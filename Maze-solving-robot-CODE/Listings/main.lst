@@ -1,0 +1,94 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              09/12/2026 17:04:11 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(9,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          
+   2          /*
+   3           * Maze-Solving Robot Firmware
+   4           *
+   5           * Copyright (c) 2026 Luis J. Pinto G.
+   6           *
+   7           * Licensed under the Apache License 2.0.
+   8           * See the LICENSE file in the project root for license information.
+   9           */
+  10          /*
+  11            
+  12            This is a simple program that controls the robot. The algorithm does not remember the route, 
+  13            it can only find an exit located on the perimeter of the maze, it cannot find the exit 
+  14            inside the maze, that's why you must design a maze which contains the exit around it, or in a corner.
+  15            You can change the values or limits according to your robot (in case you have designed your own).
+  16            
+  17            Requirements:
+  18            
+  19            According to my design, you must connect a battery that provides the robot with a voltage between 6.8 V a
+             -nd 8 V.
+  20            If you put less voltage, the robot will not work correctly or even it will not work.
+  21            If you want to upload your own firmware, make sure to disconnect the jumper which supplies voltage to the
+             - microcontroller. 
+  22            I recommend following these steps.
+  23            
+  24            1. Open the project's output folder, it contains the .hex file.
+  25            2. Select the STC89C52RC microcontroller.
+  26            3. Disconnect the microcontroller power jumper and press the RESET button.
+  27            4. Click the "Download/Program" button.
+  28            5. Connect the power supply jumper again and realase the RESET button very quickly, and wait until the fi
+             -rmware has been uploaded successfully.
+  29            
+  30          */
+  31          
+  32          #include <reg51.h>
+  33          #include "delay.h"
+  34          #include "UART.h"
+  35          #include "servo.h"
+  36          #include "HCSR04.h"
+  37          #include "BYJ48.h"
+  38          #include "MazeSolving.h"
+  39          
+  40          sbit led_1 = P2^4;
+  41          sbit led_2 = P2^5;
+  42          
+  43          /*
+  44            Timer 0 -> Servomotor
+  45            Timer 1 -> HCSR04
+  46            Timer 2 -> UART BaudRate Generator
+  47          */
+  48          
+  49          
+  50          int main(void)
+  51          {
+C51 COMPILER V9.60.7.0   MAIN                                                              09/12/2026 17:04:11 PAGE 2   
+
+  52   1        
+  53   1        /// initialize libraries
+  54   1        stepper_init();
+  55   1        uart_init();
+  56   1        servo_init();
+  57   1        sensor_HCSR04_init();
+  58   1        
+  59   1        inicio();
+  60   1        
+  61   1        while(1)
+  62   1        {
+  63   2          maze_solving(); /// this function contains the complete maze-solving algorithm.
+  64   2        }
+  65   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     20    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

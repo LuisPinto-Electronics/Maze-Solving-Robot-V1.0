@@ -1,0 +1,70 @@
+C51 COMPILER V9.60.7.0   HCSR04                                                            09/11/2026 10:55:53 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE HCSR04
+OBJECT MODULE PLACED IN .\Objects\HCSR04.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE HCSR04.c OPTIMIZE(9,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\HC
+                    -SR04.lst) TABS(2) OBJECT(.\Objects\HCSR04.obj)
+
+line level    source
+
+   1          /*
+   2           * HCSR04.c
+   3           *
+   4           * Author: Luis J. Pinto G.
+   5           *
+   6           * Description:
+   7           * Driver for the HC-SR04 ultrasonic distance sensor.
+   8           *
+   9           * Timer 1 is configured in Gate mode, allowing the
+  10           * microcontroller to measure the width of the ECHO pulse.
+  11           *
+  12           * The measured pulse width is converted into distance
+  13           * expressed in centimeters.
+  14           */
+  15          
+  16          #include "HCSR04.h"
+  17          #include "delay.h"
+  18          
+  19          sbit TRIG_PIN = P3^4;
+  20          sbit ECHO_PIN = P3^3;
+  21          
+  22          void sensor_HCSR04_init(void)
+  23          {
+  24   1          // Timer1: GATE=1, C/T=0, Modo 1 (16 bits) -> 1001 = 0x9
+  25   1          TMOD &= ~0xF0;
+  26   1          TMOD |= 0x90;
+  27   1          TH1 = 0;
+  28   1          TL1 = 0;
+  29   1          TR1 = 1;
+  30   1      }
+  31          
+  32          unsigned int get_distance_cm(void)
+  33          {
+  34   1          unsigned int tiempo_us;
+  35   1          TH1 = 0;
+  36   1          TL1 = 0;
+  37   1          TRIG_PIN = 1;
+  38   1          delay_us(10);
+  39   1          TRIG_PIN = 0;
+  40   1          while (ECHO_PIN == 0); /// esperita a que se ponga en 1
+  41   1          while (ECHO_PIN == 1); /// bloquear programa hasta que se ponga en 0 el echo y leer el resultado
+  42   1          tiempo_us = (TH1 << 8) | TL1; /// combinar 2 bytes para tener el resultado
+  43   1          return tiempo_us / 58;
+  44   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     50    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V9.60.7.0   HCSR04                                                            09/11/2026 10:55:53 PAGE 2   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
