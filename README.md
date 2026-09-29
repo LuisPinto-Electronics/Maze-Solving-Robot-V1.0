@@ -195,6 +195,79 @@ The bring-up process included:
 
 ---
 
+# Maze-Solving Algorithm
+
+The robot uses a **left-hand wall-following strategy** based on continuous ultrasonic distance measurements.
+
+The ultrasonic sensor is positioned to measure the distance to three directions:
+
+* **L** — Left
+* **F** — Front
+* **R** — Right
+
+The navigation algorithm continuously evaluates these three measurements and determines the next movement according to a defined priority.
+
+<p align="center">
+  <img src="images/flowchart.jpg" alt="Maze-solving algorithm flowchart" width="850">
+</p>
+
+### Navigation Logic
+
+**1. Sensor Measurement**
+
+The robot continuously measures the distance to the left, front, and right sides:
+
+* `L` → Left
+* `F` → Front
+* `R` → Right
+
+**2. Left-Side Priority**
+
+If the left side is free:
+
+`L = No`
+
+the robot gives priority to turning left.
+
+**3. Front and Right Evaluation**
+
+If the left side is blocked:
+
+`L = Yes`
+
+the robot evaluates the front and then the right side.
+
+* If the front is free:
+
+  `F = No`
+
+  → **Go Ahead**
+
+* If the front is blocked:
+
+  `F = Yes`
+
+  but the right side is free:
+
+  `R = No`
+
+  → **Turn Right**
+
+* If all three directions are blocked:
+
+  `L = Yes, F = Yes, R = Yes`
+
+  → **Turn 180°**
+
+**4. Movement and Stop**
+
+After selecting the appropriate direction, the robot proceeds through the **Go Ahead** stage.
+
+The motors are then stopped for a programmed time interval by the microcontroller before the next sensor measurement cycle.
+
+The algorithm does not maintain a complete map of the maze. Instead, it continuously reacts to the current sensor measurements, making it a relatively simple approach for demonstrating autonomous navigation using an embedded microcontroller.
+
+
 # Firmware
 
 The firmware was written in **Embedded C** for the STC89C52RC.
