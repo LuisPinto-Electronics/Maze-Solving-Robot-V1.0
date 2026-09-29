@@ -108,9 +108,6 @@ Robot Assembly
       ↓
 System Testing
 ```
-
-> **[IMAGE PLACEHOLDER — Add a project timeline/collage showing the evolution from concept → prototype → PCB → assembled robot]**
-
 This process provided hands-on experience with the transition from an embedded systems concept to **real manufactured hardware**.
 
 ---
@@ -157,9 +154,13 @@ The PCB integrates:
 * Protection components
 * Ground planes
 
-> **[IMAGE PLACEHOLDER — Add EasyEDA PCB 3D render]**
+<p align="center">
+  <img src="Schematic_Maze-Solving-Robot_2026-09-14.png" width="700">
+</p>
 
-> **[IMAGE PLACEHOLDER — Add photograph of the manufactured PCB]**
+<p align="center">
+  <img src="images/Design.png" width="700">
+</p>
 
 The custom PCB was designed specifically around the electrical and mechanical requirements of the robot, allowing the final system to be considerably more integrated than a breadboard prototype.
 
@@ -182,13 +183,15 @@ The bring-up process included:
 * Motor and servo testing
 * Firmware integration
 
-> **[IMAGE PLACEHOLDER — Add oscilloscope measurement of the MCU clock]**
+> **Oscilloscope measurement of the MCU clock**
+<p align="center">
+  <img src="images/oscilador.jpeg" width="700">
+</p>
 
-> **[IMAGE PLACEHOLDER — Add photograph of electrical measurements during bring-up]**
-
-> **[IMAGE PLACEHOLDER — Add screenshot/photo showing successful firmware programming]**
-
-This stage was particularly valuable because it connected the theoretical PCB design with the behavior of the **actual manufactured hardware**.
+> **Electrical measurements during bring-up**
+<p align="center">
+  <img src="images/voltaje.jpeg" width="700">
+</p>
 
 ---
 
@@ -278,7 +281,9 @@ Their support made it possible to transition the project from a prototype develo
 
 **JLCPCB** is a PCB manufacturing and PCBA service provider offering PCB fabrication, component sourcing, and assembly services.
 
-> **[IMAGE PLACEHOLDER — Add JLCPCB collaboration/sponsorship image, package photo, or manufacturing screenshot]**
+<p align="center">
+  <img src="images/sponsor.jpeg" width="700">
+</p>
 
 **Learn more about JLCPCB:**
 https://jlcpcb.com
