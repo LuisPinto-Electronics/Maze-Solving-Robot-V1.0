@@ -1,7 +1,7 @@
 # Maze-Solving Robot V1.0
 
 <p align="center">
-  <img src="images/robot-final.jpg" alt="Maze-Solving Robot V1.0" width="700">
+  <img src="images/robot.jpeg" alt="Maze-Solving Robot V1.0" width="700">
 </p>
 
 <p align="center">
@@ -34,9 +34,9 @@ The main objective was not only to build a functional robot, but also to gain pr
 
 ## Project Demonstration
 
-> **[IMAGE PLACEHOLDER — Add a photo or GIF of the completed robot solving a maze]**
-
-**Suggested image:** A clear photograph or short GIF showing the final robot navigating a maze.
+<p align="center">
+  <img src="images/robot moving.gif" width="700">
+</p>
 
 **▶ [Watch the complete project video](YOUR_VIDEO_LINK_HERE)**
 
@@ -57,9 +57,9 @@ The manufacturing process included:
 * PCB assembly inspection
 * Manufacturing of the final embedded hardware
 
-> **[IMAGE PLACEHOLDER — Add a photograph of the JLCPCB package / assembled PCB]**
-
-> **[IMAGE PLACEHOLDER — Add a close-up photograph of the assembled PCB]**
+<p align="center">
+  <img src="images/unboxing.jpeg" width="700">
+</p>
 
 The complete manufacturing files are included in this repository to make the hardware design transparent and reproducible.
 
@@ -133,7 +133,9 @@ This process provided hands-on experience with the transition from an embedded s
 | **TVS protection**             | Transient voltage protection         |
 | **Status LEDs**                | System and debugging indicators      |
 
-> **[IMAGE PLACEHOLDER — Add a labeled photograph of the PCB identifying the main components]**
+<p align="center">
+  <img src="images/components.jpeg" alt="Maze-Solving Robot V1.0" width="700">
+</p>
 
 ---
 
